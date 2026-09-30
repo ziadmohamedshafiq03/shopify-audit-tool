@@ -375,7 +375,8 @@ if raw_shop is not None:
         xref = None
 findings = ae.build_findings(stats, A, xref)
 score, grade = ae.health_score(stats, A, xref)
-money = ae.money_model(stats, A, xref) if band else None
+# Dollar figures only when we can confirm which OOS products are live (needs the Shopify export).
+money = ae.money_model(stats, A, xref) if band and xref is not None else None
 
 if xref is not None:
     at_risk = xref["oversell"][[c for c in ("sku", "title", "vendor", "qty", "qty_sup", "price") if c in xref["oversell"]]]
@@ -402,8 +403,6 @@ if xref is not None and oos_active and score < 80:
 elif xref is None and stats.get("has_qty") and stats["oos"]:
     headline = f"{stats['oos']:,} SKUs are out of stock at your supplier."
     sub = "Add your Shopify product export to see how many are still live and purchasable."
-    if money:
-        sub += f" If all of them are live, the exposure is up to {exposure_txt}/month."
 elif score >= 80:
     mism = len(xref["overstated"]) + len(xref["missed"]) if xref is not None else stats.get("low", 0)
     headline = f"Health Score {score}/100. Your catalog is in good shape."
@@ -432,7 +431,8 @@ if money:
     cards.append(kpi("Est. monthly exposure", usd(money["monthly_total"], compact=True), meta,
                      "critical" if money["monthly_total"] else "pass"))
 else:
-    cards.append(kpi("Est. monthly exposure", "—", "Select your revenue range above"))
+    cards.append(kpi("Est. monthly exposure", "—",
+                     "Add your Shopify export to estimate" if xref is None else "Select your revenue range above"))
 html('<div class="ov-kpis">' + "".join(cards) + "</div>")
 
 # ============================================================
@@ -570,6 +570,7 @@ with e2:
                         "first_name": first_name.strip(), "email": email, "store_url": store_url,
                         "context": "report_gate", "revenue_band": band or "", "sync_method": sync_method,
                         "aov": aov, "stats": lead_stats,
+                        "report_emailed_by_app": followup.smtp_configured(),
                     }, WEBHOOK_URL, HUBSPOT_TOKEN)
                     st.session_state["report_lead"] = record
                     st.rerun()

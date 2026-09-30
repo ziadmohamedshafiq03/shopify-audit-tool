@@ -11,7 +11,7 @@ Cadence by tier (see leads.score_lead):
 Leads with "call_booked": true or "unsubscribed": true are skipped.
 
 SMTP settings (env): SMTP_HOST, SMTP_PORT (587), SMTP_USER, SMTP_PASSWORD,
-FROM_EMAIL, OWNER_EMAIL, CALENDAR_LINK, OPERATOR_NAME.
+FROM_EMAIL, OWNER_EMAIL, CALENDAR_LINK, OPERATOR_NAME, CASE_STUDY (optional, real results only).
 """
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ TEMPLATES = {
 
 Your audit report for {store_url} is attached.
 
-The headline: {oos_active_count} products are live on Shopify but out of stock at your supplier. At the inputs you gave, that is an estimated {monthly_exposure}/month in at-risk orders.
+The headline: {oos_active_count} products are live on Shopify but out of stock at your supplier.{exposure_line}
 
 The report lists every assumption, so you can adjust it to your real numbers. If anything looks wrong, reply and I'll check it.
 
@@ -49,8 +49,8 @@ That fixes today's list. The underlying problem is that tomorrow's list will be 
     3: ("How long does {store_url} sell stock it doesn't have?",
         """{first_name},
 
-Your exposure is roughly the time between a supplier stockout and your next sync. With a daily import that's up to 24 hours per stockout; with a 15-minute sync it's about 15 minutes. That gap is what drives the {monthly_exposure} figure in your report.
-
+Your exposure is roughly the time between a supplier stockout and your next sync. With a daily import that's up to 24 hours per stockout; with a 15-minute sync it's about 15 minutes.{exposure_gap}
+{case_study}
 If you'd like to see what closing that gap would take for your feeds: {calendar_link}
 
 — {operator}"""),
@@ -69,6 +69,7 @@ CADENCE = {"hot": [0], "warm": [0, 1, 3, 7], "cold": [0, 7]}
 
 def merge_fields(lead: dict) -> dict:
     s = lead.get("stats", {})
+    exposure = float(s.get("monthly_exposure") or 0)
     return {
         "first_name": (lead.get("first_name") or "there").split()[0].title(),
         "store_url": lead.get("store_url") or "your store",
@@ -77,6 +78,12 @@ def merge_fields(lead: dict) -> dict:
         "monthly_exposure": f"${s.get('monthly_exposure', 0):,.0f}",
         "calendar_link": os.environ.get("CALENDAR_LINK", "[calendar link]"),
         "operator": OPERATOR,
+        "exposure_line": (f" At the inputs you gave, that is an estimated ${exposure:,.0f}/month in at-risk orders."
+                          if exposure > 0 else ""),
+        "exposure_gap": (f" That gap is what drives the ${exposure:,.0f} figure in your report." if exposure > 0 else ""),
+        # A real, anonymised client result (e.g. "A homeware brand on 3 supplier feeds cut oversells from
+        # ~40/month to 2 after switching to a 15-minute sync."). Left out entirely when not set.
+        "case_study": f"\n{os.environ['CASE_STUDY'].strip()}\n" if os.environ.get("CASE_STUDY", "").strip() else "",
     }
 
 

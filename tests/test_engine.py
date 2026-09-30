@@ -103,7 +103,7 @@ def test_money_model_is_bounded_and_labelled(audit):
     assert m["revenue_at_risk"] <= a.annual_revenue / 12 * a.exposure_cap_pct + 1e-6
     assert m["conservative_total"] == pytest.approx(m["monthly_total"] / 2)
     assert m["ad_waste"] == 0          # hidden until ad spend is entered
-    assert ae.money_model(stats, a)["upper_bound"]
+    assert ae.money_model(stats, a)["upper_bound"]   # engine still labels it; the app hides it
 
 
 def test_money_cap_applies():
@@ -180,7 +180,7 @@ def test_save_lead_upserts(tmp_path, monkeypatch):
     assert data[0]["followups_sent"] == [0]
 
 
-def test_followup_cadence_and_render():
+def test_followup_cadence_and_render(monkeypatch):
     now = datetime.now(timezone.utc)
     lead = {"email": "a@b.com", "tier": "warm", "first_name": "sam lee", "store_url": "shop.com",
             "first_captured_at": (now - timedelta(days=3, hours=1)).isoformat(), "followups_sent": [0],
@@ -188,5 +188,12 @@ def test_followup_cadence_and_render():
     assert followup.due_steps(lead, now) == [1, 3]
     subject, body = followup.render(3, lead)
     assert "shop.com" in subject and "$1,234" in body and body.startswith("Sam,")
+    assert "$1,234 figure" in body
+    zero = {**lead, "stats": {**lead["stats"], "monthly_exposure": 0}}
+    assert "$0" not in followup.render(0, zero)[1] and "$0" not in followup.render(3, zero)[1]
+    monkeypatch.setenv("CASE_STUDY", "A real result.")
+    assert "A real result." in followup.render(3, lead)[1]
+    monkeypatch.delenv("CASE_STUDY")
+    assert "A real result." not in followup.render(3, lead)[1]
     assert followup.due_steps({**lead, "call_booked": True}, now) == []
     assert followup.due_steps({**lead, "tier": "cold"}, now) == []

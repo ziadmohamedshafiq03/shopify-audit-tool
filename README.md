@@ -22,7 +22,8 @@ sync engine.
 7. **Follow-up**: `followup.py` sends the day 0/1/3/7 sequence by tier.
 
 The money model is conservative, capped at 3% of monthly revenue, and fully explained in the report. See
-`audit_engine.money_model`. Without a Shopify export, figures are labelled as upper bounds.
+`audit_engine.money_model`. Dollar figures appear only when a Shopify export is uploaded, because that is the
+only way to confirm which out-of-stock products are actually live. A supplier file alone shows counts only.
 
 ## Run locally
 
@@ -31,6 +32,21 @@ pip install -r requirements.txt
 streamlit run SupplierValidator.py
 python -m pytest -q tests        # engine, report, lead and follow-up tests
 ```
+
+## Recommended free setup: Google Sheets + Gmail
+
+`integrations/google_sheets_leads.gs` turns a Google Sheet into the lead CRM and sends the follow-up
+sequence from your Gmail account. It needs no servers or paid tools, and leads survive Streamlit Cloud
+redeploys.
+
+1. Create a Google Sheet. Go to Extensions → Apps Script, paste the file, and edit `CONFIG` at the top.
+2. Deploy → New deployment → **Web app**. Set Execute as **Me** and access to **Anyone**. Copy the URL.
+3. Set that URL as `LEAD_WEBHOOK_URL` in the app's secrets. Leave the `SMTP_*` keys unset.
+4. Run `setup` once in the Apps Script editor. It creates the `Leads` tab and an hourly follow-up trigger.
+5. Tick `call_booked` or `unsubscribed` on a row to stop that lead's emails.
+
+The script also emails you when a hot lead arrives. Free Gmail sends about 100 emails a day. `followup.py`
+remains available if you'd rather self-host with SMTP.
 
 ## Configure
 
@@ -42,7 +58,8 @@ variables or Streamlit Cloud secrets. Every key is optional.
 | `CALENDAR_LINK` | "Book a feasibility review" button. Without it, the button becomes a request form. |
 | `LEAD_WEBHOOK_URL` | Posts each lead as JSON to Zapier / Make / n8n / GoHighLevel. |
 | `HUBSPOT_TOKEN` | Creates a HubSpot contact. |
-| `SMTP_*`, `FROM_EMAIL`, `OWNER_EMAIL` | Emails the report on capture, runs the follow-up sequence, and sends hot-lead alerts. |
+| `SMTP_*`, `FROM_EMAIL`, `OWNER_EMAIL` | Self-hosted alternative to the Sheets script: emails the report on capture, runs `followup.py`, and sends hot-lead alerts. |
+| `CASE_STUDY` | Optional line in the day-3 email. Use a **real**, anonymised client result only. It's omitted when blank. |
 
 Leads are also written to `captured_leads.json`, which holds summary stats only and is gitignored. On
 Streamlit Cloud the filesystem is ephemeral, so configure a webhook or HubSpot for durable storage.
@@ -62,5 +79,6 @@ python followup.py             # send what's due
 | `audit_engine.py` | File loading, column detection, audit, cross-reference, money model, score (no Streamlit) |
 | `report.py` | Email-gated HTML report |
 | `leads.py` | Lead storage, scoring, webhook and HubSpot routing |
-| `followup.py` | Email sequence templates and sender |
+| `followup.py` | Email sequence templates and sender (self-hosted option) |
+| `integrations/google_sheets_leads.gs` | Free Google Sheets CRM + Gmail follow-up sequence |
 | `tests/` | pytest suite. `tests/fixtures/` holds synthetic test files only. |
