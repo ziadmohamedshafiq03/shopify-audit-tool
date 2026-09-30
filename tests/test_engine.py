@@ -197,3 +197,34 @@ def test_followup_cadence_and_render(monkeypatch):
     assert "A real result." not in followup.render(3, lead)[1]
     assert followup.due_steps({**lead, "call_booked": True}, now) == []
     assert followup.due_steps({**lead, "tier": "cold"}, now) == []
+
+
+def test_brevo_payload(monkeypatch):
+    calls = []
+
+    class Resp:
+        def __init__(self, code, text=""):
+            self.status_code, self.text = code, text
+
+    def fake_post(url, **kw):
+        calls.append(("POST", url, kw.get("json")))
+        return Resp(201)
+
+    def fake_put(url, **kw):
+        calls.append(("PUT", url, kw.get("json")))
+        return Resp(204)
+
+    monkeypatch.setattr(leads.requests, "post", fake_post)
+    monkeypatch.setattr(leads.requests, "put", fake_put)
+    for k, v in {"BREVO_API_KEY": "k", "BREVO_LIST_HOT": "3", "BREVO_LIST_WARM": "4", "BREVO_LIST_COLD": "5",
+                 "BREVO_SENDER_EMAIL": "me@x.com", "OWNER_EMAIL": "me@x.com"}.items():
+        monkeypatch.setenv(k, v)
+    lead = {"email": "ops@brand.com", "first_name": "Sam", "store_url": "brand.com", "tier": "hot", "score": 80,
+            "revenue_band": "$1M - $5M", "stats": {"health_score": 43, "oos_active_count": 13,
+                                                   "monthly_exposure": 1039, "supplier_count": 3}}
+    leads._post_brevo(lead)
+    contact = calls[0][2]
+    assert contact["listIds"] == [3] and contact["updateEnabled"]
+    assert contact["attributes"]["FIRSTNAME"] == "Sam" and contact["attributes"]["OOS_ACTIVE"] == 13.0
+    assert contact["attributes"]["SUPPLIER_COUNT"] == 3.0
+    assert calls[1][1].endswith("/smtp/email") and calls[1][2]["to"] == [{"email": "me@x.com"}]

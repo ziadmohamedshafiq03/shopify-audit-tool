@@ -4,6 +4,9 @@ Only summary numbers are stored — never the uploaded files.
 Routing targets are configured with env vars or .streamlit/secrets.toml:
   LEAD_WEBHOOK_URL   Zapier / Make / n8n / GoHighLevel inbound webhook (JSON POST)
   HUBSPOT_TOKEN      HubSpot private-app token (creates/updates a contact)
+  BREVO_API_KEY      Brevo (free CRM + email automation). Also BREVO_LIST_HOT/WARM/COLD list ids,
+                     and BREVO_SENDER_EMAIL + OWNER_EMAIL for hot-lead alerts.
+                     Run `python integrations/brevo_setup.py` once to create the lists/attributes.
 """
 from __future__ import annotations
 
@@ -87,6 +90,78 @@ def _post_hubspot(token: str, lead: dict) -> None:
         pass
 
 
+BREVO_API = "https://api.brevo.com/v3"
+
+# Lead fields -> Brevo contact attributes (created by integrations/brevo_setup.py).
+BREVO_ATTRIBUTES = {
+    "FIRSTNAME": ("first_name", "text"),
+    "STORE_URL": ("store_url", "text"),
+    "TIER": ("tier", "text"),
+    "LEAD_SCORE": ("score", "float"),
+    "REVENUE_BAND": ("revenue_band", "text"),
+    "SYNC_METHOD": ("sync_method", "text"),
+    "HEALTH_SCORE": ("stats.health_score", "float"),
+    "OOS_ACTIVE": ("stats.oos_active_count", "float"),
+    "MONTHLY_EXPOSURE": ("stats.monthly_exposure", "float"),
+    "TOTAL_SKUS": ("stats.total_skus", "float"),
+    "SUPPLIER_COUNT": ("supplier_count", "float"),
+    "FEED_DELIVERY": ("feed_delivery", "text"),
+}
+
+
+def brevo_attributes(lead: dict) -> dict:
+    out = {}
+    for attr, (path, kind) in BREVO_ATTRIBUTES.items():
+        value = lead
+        for part in path.split("."):
+            value = value.get(part) if isinstance(value, dict) else None
+        if value is None and path == "supplier_count":
+            value = lead.get("stats", {}).get("supplier_count")
+        if value in (None, ""):
+            continue
+        out[attr] = float(value) if kind == "float" else str(value)
+    return out
+
+
+def _post_brevo(lead: dict) -> None:
+    key = os.environ.get("BREVO_API_KEY", "")
+    lists = {t: os.environ.get(f"BREVO_LIST_{t.upper()}", "") for t in ("hot", "warm", "cold")}
+    headers = {"api-key": key, "accept": "application/json", "content-type": "application/json"}
+    try:
+        target = int(lists[lead["tier"]]) if lists.get(lead["tier"]) else None
+        body = {"email": lead["email"], "attributes": brevo_attributes(lead), "updateEnabled": True}
+        if target:
+            body["listIds"] = [target]
+        r = requests.post(f"{BREVO_API}/contacts", headers=headers, json=body, timeout=6)
+        if r.status_code == 400 and "attribute" in r.text.lower():
+            # First run without integrations/brevo_setup.py: create the custom fields, then retry once.
+            for attr, (_, kind) in BREVO_ATTRIBUTES.items():
+                requests.post(f"{BREVO_API}/contacts/attributes/normal/{attr}", headers=headers,
+                              json={"type": kind}, timeout=6)
+            r = requests.post(f"{BREVO_API}/contacts", headers=headers, json=body, timeout=6)
+        if r.status_code == 204 and target:
+            # Existing contact whose tier changed: leave the other tier lists so only one sequence runs.
+            others = [int(v) for t, v in lists.items() if v and int(v) != target]
+            if others:
+                requests.put(f"{BREVO_API}/contacts/{requests.utils.quote(lead['email'])}", headers=headers,
+                             json={"unlinkListIds": others}, timeout=6)
+        sender, owner = os.environ.get("BREVO_SENDER_EMAIL"), os.environ.get("OWNER_EMAIL")
+        if r.status_code == 201 and lead["tier"] == "hot" and sender and owner:
+            s = lead.get("stats", {})
+            requests.post(f"{BREVO_API}/smtp/email", headers=headers, timeout=6, json={
+                "sender": {"email": sender, "name": "Oversell Auditor"},
+                "to": [{"email": owner}],
+                "subject": f"HOT lead: {lead['email']} ({lead.get('store_url', '')})",
+                "textContent": (f"Reach out personally within 4 business hours.\n\n"
+                                f"Name: {lead.get('first_name', '')}\nStore: {lead.get('store_url', '')}\n"
+                                f"Revenue: {lead.get('revenue_band', '')}\nSync: {lead.get('sync_method', '')}\n"
+                                f"Health score: {s.get('health_score')}\nLive-but-OOS: {s.get('oos_active_count')}\n"
+                                f"Est. exposure/mo: ${s.get('monthly_exposure', 0):,}\nLead score: {lead.get('score')}"),
+            })
+    except (requests.RequestException, ValueError, KeyError):
+        pass
+
+
 def save_lead(lead: dict, webhook_url: str = "", hubspot_token: str = "") -> dict:
     """Persist + route a lead. Returns the enriched record. Never raises on routing errors."""
     lead = dict(lead)
@@ -113,6 +188,8 @@ def save_lead(lead: dict, webhook_url: str = "", hubspot_token: str = "") -> dic
         threading.Thread(target=_post_webhook, args=(webhook_url, lead), daemon=True).start()
     if hubspot_token:
         threading.Thread(target=_post_hubspot, args=(hubspot_token, lead), daemon=True).start()
+    if os.environ.get("BREVO_API_KEY"):
+        threading.Thread(target=_post_brevo, args=(lead,), daemon=True).start()
     return lead
 
 

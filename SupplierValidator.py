@@ -34,7 +34,8 @@ OPERATOR = get_setting("OPERATOR_NAME", "Ziad")
 CALENDAR_LINK = get_setting("CALENDAR_LINK")
 WEBHOOK_URL = get_setting("LEAD_WEBHOOK_URL")
 HUBSPOT_TOKEN = get_setting("HUBSPOT_TOKEN")
-for _k in ("SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASSWORD", "FROM_EMAIL", "OWNER_EMAIL", "CALENDAR_LINK"):
+for _k in ("SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASSWORD", "FROM_EMAIL", "OWNER_EMAIL", "CALENDAR_LINK",
+           "BREVO_API_KEY", "BREVO_LIST_HOT", "BREVO_LIST_WARM", "BREVO_LIST_COLD", "BREVO_SENDER_EMAIL"):
     if get_setting(_k) and not os.environ.get(_k):
         os.environ[_k] = get_setting(_k)   # followup.send_email reads env
 

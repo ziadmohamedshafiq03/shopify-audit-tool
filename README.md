@@ -33,20 +33,19 @@ streamlit run SupplierValidator.py
 python -m pytest -q tests        # engine, report, lead and follow-up tests
 ```
 
-## Recommended free setup: Google Sheets + Gmail
+## Recommended free setup: Brevo
 
-`integrations/google_sheets_leads.gs` turns a Google Sheet into the lead CRM and sends the follow-up
-sequence from your Gmail account. It needs no servers or paid tools, and leads survive Streamlit Cloud
-redeploys.
+Brevo's free plan acts as both the lead CRM and the email sender: 100k contacts, 300 emails a day, and
+automations included. You sign up with your existing email, and no Google authorization is needed. Each
+lead is added to a hot, warm or cold list, and a Brevo automation on each list sends the day 0/1/3/7
+sequence. Hot leads also trigger an alert email to you.
 
-1. Create a Google Sheet. Go to Extensions → Apps Script, paste the file, and edit `CONFIG` at the top.
-2. Deploy → New deployment → **Web app**. Set Execute as **Me** and access to **Anyone**. Copy the URL.
-3. Set that URL as `LEAD_WEBHOOK_URL` in the app's secrets. Leave the `SMTP_*` keys unset.
-4. Run `setup` once in the Apps Script editor. It creates the `Leads` tab and an hourly follow-up trigger.
-5. Tick `call_booked` or `unsubscribed` on a row to stop that lead's emails.
+Setup takes about 10 minutes. Follow **[integrations/BREVO_SETUP.md](integrations/BREVO_SETUP.md)**.
 
-The script also emails you when a hot lead arrives. Free Gmail sends about 100 emails a day. `followup.py`
-remains available if you'd rather self-host with SMTP.
+**Alternatives:**
+- `integrations/google_sheets_leads.gs` uses a Google Sheet and Gmail. It needs a Google account that can
+  authorize Apps Script.
+- `followup.py` sends the sequence through any SMTP server you host yourself.
 
 ## Configure
 
@@ -56,6 +55,7 @@ variables or Streamlit Cloud secrets. Every key is optional.
 | Key | Purpose |
 |---|---|
 | `CALENDAR_LINK` | "Book a feasibility review" button. Without it, the button becomes a request form. |
+| `BREVO_API_KEY`, `BREVO_LIST_HOT/WARM/COLD`, `BREVO_SENDER_EMAIL` | Brevo CRM + automations (recommended). |
 | `LEAD_WEBHOOK_URL` | Posts each lead as JSON to Zapier / Make / n8n / GoHighLevel. |
 | `HUBSPOT_TOKEN` | Creates a HubSpot contact. |
 | `SMTP_*`, `FROM_EMAIL`, `OWNER_EMAIL` | Self-hosted alternative to the Sheets script: emails the report on capture, runs `followup.py`, and sends hot-lead alerts. |
@@ -80,5 +80,6 @@ python followup.py             # send what's due
 | `report.py` | Email-gated HTML report |
 | `leads.py` | Lead storage, scoring, webhook and HubSpot routing |
 | `followup.py` | Email sequence templates and sender (self-hosted option) |
+| `integrations/BREVO_SETUP.md`, `brevo_setup.py` | Brevo setup guide, email templates, one-time list creator |
 | `integrations/google_sheets_leads.gs` | Free Google Sheets CRM + Gmail follow-up sequence |
 | `tests/` | pytest suite. `tests/fixtures/` holds synthetic test files only. |
