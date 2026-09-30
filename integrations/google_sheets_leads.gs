@@ -112,7 +112,7 @@ function sendFollowups() {
 
     const day = Math.max(...due);                  // never send a backlog burst
     const msg = render_(day, row, idx);
-    GmailApp.sendEmail(row[idx.email], msg.subject,
+    MailApp.sendEmail(row[idx.email], msg.subject,
       msg.body + '\n\n—\nReply "unsubscribe" and I won\'t email again.',
       { name: CONFIG.OPERATOR_NAME, replyTo: CONFIG.OWNER_EMAIL });
     quota--;
