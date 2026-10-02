@@ -1,0 +1,5 @@
+__pycache__/
+.pytest_cache/
+.streamlit/secrets.toml
+captured_leads.json
+captured_leads.json.tmp

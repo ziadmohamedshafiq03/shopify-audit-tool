@@ -1,0 +1,176 @@
+Handle,Title,Vendor,Status,Variant SKU,Variant Inventory Qty,Variant Inventory Policy,Variant Price,Cost per item
+olive-oak-serving-board-0,Olive Oak Serving Board,Crest Distribution,draft,HG-1001,0,deny,24.59,27.32
+sand-glass-carafe-1,Sand Glass Carafe,Northwind Supply,active,HG-1002,59,deny,69.39,37.47
+sand-cotton-apron-2,Sand Cotton Apron,Harbor Wholesale,active,HG-1003,146,continue,74.14,28.58
+sand-jute-rug-3,Sand Jute Rug,Crest Distribution,active,HG-1004,168,deny,28.19,12.69
+sand-jute-rug-4,Sand Jute Rug,Northwind Supply,active,HG-1005,0,deny,87.38,37.62
+sand-stoneware-bowl-5,Sand Stoneware Bowl,Crest Distribution,active,HG-1006,0,deny,98.53,52.36
+sand-jute-rug-6,Sand Jute Rug,Northwind Supply,active,HG-1007,51,deny,56.79,22.66
+rust-jute-rug-7,Rust Jute Rug,Crest Distribution,active,HG-1008,145,deny,100.13,40.5
+sand-jute-rug-8,Sand Jute Rug,Harbor Wholesale,active,HG-1009,4,deny,16.89,9.22
+ivory-jute-rug-9,Ivory Jute Rug,Northwind Supply,active,HG-1010,68,deny,110.98,55.87
+navy-canvas-tote-10,Navy Canvas Tote,Harbor Wholesale,active,HG-1011,131,deny,20.34,10.42
+navy-brass-candle-holder-11,Navy Brass Candle Holder,Crest Distribution,active,HG-1012,38,deny,42.14,21.55
+ivory-oak-serving-board-12,Ivory Oak Serving Board,Harbor Wholesale,active,HG-1013,4,deny,98.37,46.89
+sand-ceramic-mug-13,Sand Ceramic Mug,Harbor Wholesale,active,HG-1014,229,deny,102.11,47.29
+olive-glass-carafe-14,Olive Glass Carafe,Northwind Supply,active,HG-1015,121,deny,92.2,38.1
+sand-wool-blanket-15,Sand Wool Blanket,Crest Distribution,active,HG-1016,28,deny,80.79,31.6
+navy-wool-blanket-16,Navy Wool Blanket,Harbor Wholesale,active,HG-1017,215,deny,94.57,40.94
+olive-cotton-apron-17,Olive Cotton Apron,Harbor Wholesale,active,HG-1018,253,deny,123.75,53.9
+olive-oak-serving-board-18,Olive Oak Serving Board,Harbor Wholesale,active,HG-1019,60,deny,71.35,38.99
+slate-canvas-tote-19,Slate Canvas Tote,Northwind Supply,active,HG-1020,132,deny,52.59,27.49
+slate-brass-candle-holder-20,Slate Brass Candle Holder,Harbor Wholesale,active,HG-1021,40,deny,71.99,27.69
+rust-wool-blanket-21,Rust Wool Blanket,Harbor Wholesale,active,HG-1022,179,deny,100.64,44.15
+slate-oak-serving-board-22,Slate Oak Serving Board,Northwind Supply,active,HG-1023,10,deny,26.53,10.48
+ivory-jute-rug-23,Ivory Jute Rug,Harbor Wholesale,active,HG-1024,42,deny,38.91,15.85
+rust-glass-carafe-24,Rust Glass Carafe,Crest Distribution,active,HG-1025,37,deny,91.2,38.93
+rust-jute-rug-25,Rust Jute Rug,Crest Distribution,active,HG-1026,121,deny,95.02,41.37
+rust-cotton-apron-26,Rust Cotton Apron,Crest Distribution,active,HG-1027,128,deny,53.97,27.5
+ivory-linen-throw-27,Ivory Linen Throw,Northwind Supply,active,HG-1028,117,deny,36.46,16.29
+sand-glass-carafe-28,Sand Glass Carafe,Crest Distribution,active,HG-1029,2,deny,81.74,38.44
+sand-glass-carafe-29,Sand Glass Carafe,Northwind Supply,active,HG-1030,14,deny,91.24,39.14
+rust-cotton-apron-30,Rust Cotton Apron,Crest Distribution,active,HG-1031,93,deny,32.41,14.02
+olive-brass-candle-holder-31,Olive Brass Candle Holder,Harbor Wholesale,active,HG-1032,124,deny,29.33,12.63
+ivory-wool-blanket-32,Ivory Wool Blanket,Crest Distribution,active,HG-1033,3,deny,25.07,10.64
+olive-brass-candle-holder-33,Olive Brass Candle Holder,Northwind Supply,active,HG-1034,1,deny,131.5,50.76
+rust-glass-carafe-34,Rust Glass Carafe,Crest Distribution,active,HG-1035,0,deny,28.48,13.92
+olive-ceramic-mug-35,Olive Ceramic Mug,Northwind Supply,active,HG-1036,98,deny,89.35,43.59
+olive-canvas-tote-36,Olive Canvas Tote,Crest Distribution,active,HG-1037,92,deny,87.14,34.76
+slate-jute-rug-37,Slate Jute Rug,Northwind Supply,active,HG-1038,223,deny,106.27,49.82
+slate-cotton-apron-38,Slate Cotton Apron,Harbor Wholesale,active,HG-1039,137,deny,106.4,45.95
+olive-linen-throw-39,Olive Linen Throw,Harbor Wholesale,active,HG-1040,125,continue,141.61,59.44
+slate-jute-rug-40,Slate Jute Rug,Crest Distribution,active,HG-1041,244,deny,147.21,57.65
+olive-glass-carafe-41,Olive Glass Carafe,Northwind Supply,draft,HG-1042,4,deny,26.1,10.35
+olive-canvas-tote-42,Olive Canvas Tote,Northwind Supply,active,HG-1043,161,deny,60.62,32.06
+ivory-glass-carafe-43,Ivory Glass Carafe,Crest Distribution,active,HG-1044,0,deny,104.51,49.18
+sand-cotton-apron-44,Sand Cotton Apron,Northwind Supply,active,HG-1045,127,deny,104.62,48.24
+ivory-glass-carafe-45,Ivory Glass Carafe,Harbor Wholesale,active,HG-1046,189,deny,20.33,10.68
+ivory-cotton-apron-46,Ivory Cotton Apron,Northwind Supply,active,HG-1047,0,deny,103.41,46.14
+slate-oak-serving-board-47,Slate Oak Serving Board,Crest Distribution,active,HG-1048,132,deny,18.31,7.49
+slate-jute-rug-48,Slate Jute Rug,Harbor Wholesale,active,HG-1049,173,deny,94.74,50.63
+slate-stoneware-bowl-49,Slate Stoneware Bowl,Crest Distribution,active,HG-1050,6,deny,85.1,35.61
+navy-ceramic-mug-50,Navy Ceramic Mug,Northwind Supply,active,HG-1051,116,deny,66.01,34.44
+slate-linen-throw-51,Slate Linen Throw,Crest Distribution,active,HG-1052,66,deny,37.82,19.6
+olive-wool-blanket-52,Olive Wool Blanket,Crest Distribution,active,HG-1053,20,deny,89.93,35.4
+olive-brass-candle-holder-53,Olive Brass Candle Holder,Harbor Wholesale,active,HG-1054,137,deny,37.59,41.77
+rust-oak-serving-board-54,Rust Oak Serving Board,Harbor Wholesale,active,HG-1055,9,deny,76.12,34.72
+slate-jute-rug-55,Slate Jute Rug,Northwind Supply,active,HG-1056,49,deny,12.68,6.21
+ivory-jute-rug-56,Ivory Jute Rug,Crest Distribution,active,HG-1057,88,deny,116.53,45.16
+rust-stoneware-bowl-57,Rust Stoneware Bowl,Crest Distribution,active,HG-1058,32,deny,73.84,35.99
+sand-canvas-tote-58,Sand Canvas Tote,Northwind Supply,active,HG-1059,14,deny,30.52,16.33
+rust-brass-candle-holder-59,Rust Brass Candle Holder,Northwind Supply,active,HG-1060,246,deny,83.42,36.33
+ivory-glass-carafe-60,Ivory Glass Carafe,Northwind Supply,active,HG-1061,136,deny,90.36,39.08
+navy-wool-blanket-61,Navy Wool Blanket,Crest Distribution,active,HG-1062,127,deny,69.89,30.43
+slate-stoneware-bowl-62,Slate Stoneware Bowl,Crest Distribution,active,HG-1063,74,deny,132.1,53.33
+slate-brass-candle-holder-63,Slate Brass Candle Holder,Harbor Wholesale,active,HG-1064,0,deny,26.1,13.41
+sand-canvas-tote-64,Sand Canvas Tote,Northwind Supply,active,HG-1065,3,deny,53.41,29.13
+slate-glass-carafe-65,Slate Glass Carafe,Northwind Supply,active,HG-1066,127,deny,26.41,13.72
+navy-ceramic-mug-66,Navy Ceramic Mug,Northwind Supply,active,HG-1067,175,deny,52.23,27.51
+slate-cotton-apron-67,Slate Cotton Apron,Northwind Supply,active,HG-1068,112,deny,153.77,59.68
+olive-glass-carafe-68,Olive Glass Carafe,Crest Distribution,active,HG-1069,91,deny,20.13,10.98
+ivory-brass-candle-holder-69,Ivory Brass Candle Holder,Crest Distribution,active,HG-1070,140,deny,108.78,43.97
+olive-stoneware-bowl-70,Olive Stoneware Bowl,Northwind Supply,active,HG-1071,10,deny,105.95,57.88
+sand-wool-blanket-71,Sand Wool Blanket,Harbor Wholesale,active,HG-1072,51,deny,39.17,20.68
+slate-cotton-apron-72,Slate Cotton Apron,Harbor Wholesale,active,HG-1073,250,deny,112.3,51.88
+ivory-oak-serving-board-73,Ivory Oak Serving Board,Crest Distribution,active,HG-1074,139,deny,84.74,34.98
+olive-ceramic-mug-74,Olive Ceramic Mug,Harbor Wholesale,active,HG-1075,59,deny,45.01,21.07
+sand-wool-blanket-75,Sand Wool Blanket,Harbor Wholesale,active,HG-1076,213,deny,113.31,56.67
+sand-jute-rug-76,Sand Jute Rug,Northwind Supply,active,HG-1077,14,continue,121.57,52.24
+ivory-linen-throw-77,Ivory Linen Throw,Harbor Wholesale,active,HG-1078,242,deny,53.55,24.31
+rust-oak-serving-board-78,Rust Oak Serving Board,Northwind Supply,active,HG-1079,245,deny,15.15,8.33
+slate-wool-blanket-79,Slate Wool Blanket,Crest Distribution,active,HG-1080,6,deny,22.58,8.72
+olive-stoneware-bowl-80,Olive Stoneware Bowl,Crest Distribution,active,HG-1081,133,deny,93.47,47.01
+slate-wool-blanket-81,Slate Wool Blanket,Harbor Wholesale,active,HG-1082,14,deny,61.09,24.74
+sand-linen-throw-82,Sand Linen Throw,Crest Distribution,draft,HG-1083,53,deny,14.84,7.0
+ivory-canvas-tote-83,Ivory Canvas Tote,Crest Distribution,active,HG-1084,4,deny,107.45,56.47
+ivory-stoneware-bowl-84,Ivory Stoneware Bowl,Harbor Wholesale,active,HG-1085,134,deny,106.85,51.07
+navy-canvas-tote-85,Navy Canvas Tote,Crest Distribution,active,HG-1086,218,deny,130.12,59.05
+navy-oak-serving-board-86,Navy Oak Serving Board,Northwind Supply,active,HG-1087,26,deny,51.04,27.85
+sand-ceramic-mug-87,Sand Ceramic Mug,Northwind Supply,active,HG-1088,123,deny,75.73,39.77
+sand-ceramic-mug-88,Sand Ceramic Mug,Crest Distribution,active,HG-1089,142,deny,85.98,41.92
+olive-jute-rug-89,Olive Jute Rug,Northwind Supply,active,HG-1090,130,deny,42.15,19.08
+slate-wool-blanket-90,Slate Wool Blanket,Crest Distribution,active,HG-1091,89,deny,72.22,30.07
+olive-canvas-tote-91,Olive Canvas Tote,Harbor Wholesale,active,HG-1092,60,deny,18.25,7.86
+slate-linen-throw-92,Slate Linen Throw,Harbor Wholesale,active,HG-1093,0,deny,43.9,24.11
+rust-canvas-tote-93,Rust Canvas Tote,Harbor Wholesale,active,HG-1094,28,deny,50.38,19.4
+sand-oak-serving-board-94,Sand Oak Serving Board,Northwind Supply,active,HG-1095,0,deny,53.9,27.57
+olive-wool-blanket-95,Olive Wool Blanket,Crest Distribution,active,HG-1096,14,deny,81.21,40.0
+slate-jute-rug-96,Slate Jute Rug,Northwind Supply,active,HG-1097,131,deny,63.49,27.03
+olive-jute-rug-97,Olive Jute Rug,Crest Distribution,active,HG-1098,0,deny,75.45,40.73
+rust-cotton-apron-98,Rust Cotton Apron,Crest Distribution,active,HG-1099,40,deny,104.42,45.63
+rust-jute-rug-99,Rust Jute Rug,Crest Distribution,active,HG-1100,216,deny,98.45,51.09
+rust-canvas-tote-100,Rust Canvas Tote,Crest Distribution,active,HG-1101,6,deny,26.73,10.59
+olive-ceramic-mug-101,Olive Ceramic Mug,Crest Distribution,active,HG-1102,17,deny,50.44,26.34
+sand-stoneware-bowl-102,Sand Stoneware Bowl,Harbor Wholesale,active,HG-1103,8,deny,109.96,42.76
+sand-stoneware-bowl-103,Sand Stoneware Bowl,Crest Distribution,active,HG-1104,14,deny,107.14,54.48
+sand-brass-candle-holder-104,Sand Brass Candle Holder,Harbor Wholesale,active,HG-1105,6,deny,44.98,19.62
+slate-canvas-tote-105,Slate Canvas Tote,Harbor Wholesale,active,HG-1106,122,deny,37.94,18.46
+ivory-ceramic-mug-106,Ivory Ceramic Mug,Northwind Supply,active,HG-1107,201,deny,28.68,31.87
+rust-canvas-tote-107,Rust Canvas Tote,Crest Distribution,active,HG-1108,3,deny,19.81,10.18
+navy-wool-blanket-108,Navy Wool Blanket,Northwind Supply,active,HG-1109,4,deny,91.31,39.54
+ivory-wool-blanket-109,Ivory Wool Blanket,Northwind Supply,active,HG-1110,6,deny,137.16,58.52
+navy-brass-candle-holder-110,Navy Brass Candle Holder,Harbor Wholesale,active,HG-1111,123,deny,42.01,21.71
+ivory-ceramic-mug-111,Ivory Ceramic Mug,Northwind Supply,active,HG-1112,84,deny,112.84,59.64
+ivory-linen-throw-112,Ivory Linen Throw,Crest Distribution,active,HG-1113,0,deny,49.97,21.64
+ivory-wool-blanket-113,Ivory Wool Blanket,Northwind Supply,active,HG-1114,243,continue,69.19,26.89
+sand-jute-rug-114,Sand Jute Rug,Harbor Wholesale,active,HG-1115,72,deny,24.42,10.88
+slate-jute-rug-115,Slate Jute Rug,Northwind Supply,active,HG-1116,235,deny,118.23,50.29
+navy-glass-carafe-116,Navy Glass Carafe,Harbor Wholesale,active,HG-1117,129,deny,37.01,18.49
+sand-oak-serving-board-117,Sand Oak Serving Board,Harbor Wholesale,active,HG-1118,123,deny,14.26,6.19
+olive-oak-serving-board-118,Olive Oak Serving Board,Harbor Wholesale,active,HG-1119,35,deny,68.05,28.47
+sand-glass-carafe-119,Sand Glass Carafe,Northwind Supply,active,HG-1120,35,deny,93.63,46.54
+navy-linen-throw-120,Navy Linen Throw,Northwind Supply,active,HG-1121,100,deny,123.68,54.68
+ivory-cotton-apron-121,Ivory Cotton Apron,Harbor Wholesale,active,HG-1122,0,deny,123.74,59.93
+olive-linen-throw-122,Olive Linen Throw,Crest Distribution,active,HG-1123,0,deny,45.55,21.15
+olive-oak-serving-board-123,Olive Oak Serving Board,Harbor Wholesale,draft,HG-1124,135,deny,44.61,19.46
+slate-glass-carafe-124,Slate Glass Carafe,Crest Distribution,active,HG-1125,12,deny,98.6,48.4
+ivory-stoneware-bowl-125,Ivory Stoneware Bowl,Crest Distribution,active,HG-1126,20,deny,71.42,35.66
+ivory-brass-candle-holder-126,Ivory Brass Candle Holder,Harbor Wholesale,active,HG-1127,11,deny,100.88,39.21
+sand-stoneware-bowl-127,Sand Stoneware Bowl,Harbor Wholesale,active,HG-1128,95,deny,32.73,12.87
+olive-wool-blanket-128,Olive Wool Blanket,Harbor Wholesale,active,HG-1129,71,deny,109.56,45.91
+navy-canvas-tote-129,Navy Canvas Tote,Northwind Supply,active,HG-1130,113,deny,40.65,22.25
+slate-oak-serving-board-130,Slate Oak Serving Board,Harbor Wholesale,active,HG-1131,212,deny,20.45,10.06
+rust-canvas-tote-131,Rust Canvas Tote,Harbor Wholesale,active,HG-1132,207,deny,65.36,30.46
+ivory-oak-serving-board-132,Ivory Oak Serving Board,Harbor Wholesale,active,HG-1133,52,deny,74.41,35.58
+rust-ceramic-mug-133,Rust Ceramic Mug,Crest Distribution,active,HG-1134,212,deny,44.29,23.24
+slate-linen-throw-134,Slate Linen Throw,Crest Distribution,active,HG-1135,110,deny,106.44,46.48
+rust-canvas-tote-135,Rust Canvas Tote,Harbor Wholesale,active,HG-1136,20,deny,47.9,26.35
+olive-jute-rug-136,Olive Jute Rug,Northwind Supply,active,HG-1137,2,deny,131.3,58.26
+olive-canvas-tote-137,Olive Canvas Tote,Harbor Wholesale,active,HG-1138,115,deny,50.46,26.77
+sand-oak-serving-board-138,Sand Oak Serving Board,Harbor Wholesale,active,HG-1139,234,deny,17.24,7.74
+rust-brass-candle-holder-139,Rust Brass Candle Holder,Crest Distribution,active,HG-1140,242,deny,13.62,6.01
+ivory-brass-candle-holder-140,Ivory Brass Candle Holder,Northwind Supply,active,HG-1141,5,deny,37.03,19.42
+rust-ceramic-mug-141,Rust Ceramic Mug,Harbor Wholesale,active,HG-1142,170,deny,130.68,56.84
+sand-stoneware-bowl-142,Sand Stoneware Bowl,Northwind Supply,active,HG-1143,14,deny,92.39,47.95
+slate-jute-rug-143,Slate Jute Rug,Northwind Supply,active,HG-1144,82,deny,141.94,55.68
+navy-wool-blanket-144,Navy Wool Blanket,Northwind Supply,active,HG-1145,200,deny,81.7,34.53
+sand-ceramic-mug-145,Sand Ceramic Mug,Harbor Wholesale,active,HG-1146,54,deny,41.7,22.22
+olive-canvas-tote-146,Olive Canvas Tote,Crest Distribution,active,HG-1147,0,deny,121.58,48.69
+olive-brass-candle-holder-147,Olive Brass Candle Holder,Northwind Supply,active,HG-1148,219,deny,44.64,21.04
+ivory-stoneware-bowl-148,Ivory Stoneware Bowl,Harbor Wholesale,active,HG-1149,250,deny,48.08,18.68
+navy-wool-blanket-149,Navy Wool Blanket,Northwind Supply,active,HG-1150,4,deny,20.82,8.99
+olive-canvas-tote-150,Olive Canvas Tote,Harbor Wholesale,active,HG-1151,0,continue,105.69,42.04
+sand-glass-carafe-151,Sand Glass Carafe,Northwind Supply,active,HG-1152,109,deny,103.76,44.79
+sand-wool-blanket-152,Sand Wool Blanket,Harbor Wholesale,active,HG-1153,57,deny,104.74,45.91
+slate-wool-blanket-153,Slate Wool Blanket,Northwind Supply,active,HG-1154,7,deny,113.04,47.36
+olive-wool-blanket-154,Olive Wool Blanket,Northwind Supply,active,HG-1155,161,deny,22.97,11.89
+slate-brass-candle-holder-155,Slate Brass Candle Holder,Crest Distribution,active,HG-1156,247,deny,52.34,28.52
+slate-cotton-apron-156,Slate Cotton Apron,Crest Distribution,active,HG-1157,0,deny,19.0,8.94
+slate-cotton-apron-157,Slate Cotton Apron,Harbor Wholesale,active,HG-1158,0,deny,16.96,8.8
+ivory-glass-carafe-158,Ivory Glass Carafe,Northwind Supply,active,HG-1159,243,deny,82.48,45.57
+olive-canvas-tote-159,Olive Canvas Tote,Harbor Wholesale,active,HG-1160,199,deny,14.42,16.02
+sand-wool-blanket-160,Sand Wool Blanket,Harbor Wholesale,active,HG-1161,108,deny,106.91,41.88
+ivory-oak-serving-board-161,Ivory Oak Serving Board,Northwind Supply,active,HG-1162,0,deny,25.31,11.88
+olive-cotton-apron-162,Olive Cotton Apron,Harbor Wholesale,active,HG-1163,5,deny,131.7,57.6
+olive-wool-blanket-163,Olive Wool Blanket,Crest Distribution,active,HG-1164,20,deny,116.81,50.39
+ivory-canvas-tote-164,Ivory Canvas Tote,Harbor Wholesale,draft,HG-1165,54,deny,64.04,26.13
+olive-brass-candle-holder-165,Olive Brass Candle Holder,Crest Distribution,active,HG-1166,212,deny,16.86,7.64
+ivory-linen-throw-166,Ivory Linen Throw,Northwind Supply,active,HG-1167,210,deny,53.62,26.28
+olive-canvas-tote-167,Olive Canvas Tote,Harbor Wholesale,active,HG-1168,91,deny,120.29,46.35
+olive-glass-carafe-168,Olive Glass Carafe,Crest Distribution,active,HG-1169,80,deny,140.05,57.72
+navy-glass-carafe-169,Navy Glass Carafe,Crest Distribution,active,HG-1170,197,deny,124.72,55.91
+legacy-item-1,Legacy Item 1,Harbor Wholesale,active,HG-OLD-1,3,deny,29.0,11.0
+legacy-item-2,Legacy Item 2,Harbor Wholesale,active,HG-OLD-2,3,deny,29.0,11.0
+legacy-item-3,Legacy Item 3,Harbor Wholesale,active,HG-OLD-3,3,deny,29.0,11.0
+legacy-item-4,Legacy Item 4,Harbor Wholesale,active,HG-OLD-4,3,deny,29.0,11.0
+legacy-item-5,Legacy Item 5,Harbor Wholesale,active,HG-OLD-5,3,deny,29.0,11.0
