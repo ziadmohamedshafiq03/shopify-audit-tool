@@ -12,7 +12,7 @@ required, no background images, bulletproof button, hidden preheader. Brevo fill
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CALENDAR = "https://YOUR-CALENDAR-LINK"   # replace before building, or edit in Brevo
+CALENDAR = "https://cal.com/ziad-mohamed-ahmed"
 SENDER = "Ziad"
 
 GREEN, RED, INK, SUB, LINE, BG = "#008060", "#e53935", "#202223", "#6d7175", "#e1e3e5", "#f6f6f7"
