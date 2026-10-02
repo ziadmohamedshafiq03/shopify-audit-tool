@@ -59,7 +59,7 @@ entry point is **"Contact added to list"**, using the matching list.
 Set an **exit condition** on each workflow so it stops when you tag a contact. For example, stop when
 contact attribute `TIER` equals `booked`: edit the contact and set TIER to `booked` once they book a call.
 
-Create each email with **"Send an email"** and paste in the templates below. Brevo fills in
+Create each email with **"Send an email"**. For designed emails, choose **Create from scratch → HTML custom code** and paste `integrations/brevo_emails/day0.html` … `day7.html` (replace `https://YOUR-CALENDAR-LINK` first). For plain-text emails, paste in the templates below. Brevo fills in
 `{{ contact.X }}` for each lead and adds the unsubscribe link automatically. Use **Preview** with a real
 contact to check the numbers.
 
