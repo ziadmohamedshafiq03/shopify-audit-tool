@@ -1,0 +1,39 @@
+name: Follow-up emails
+
+# Sends the day 0/1/3/7 sequence to Brevo contacts (see integrations/brevo_sequence.py).
+# Needs one repository secret: BREVO_API_KEY (Settings → Secrets and variables → Actions).
+on:
+  schedule:
+    - cron: "17 * * * *"      # every hour
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only list who is due; send nothing"
+        type: boolean
+        default: false
+
+concurrency:
+  group: followups
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Send due follow-ups
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_LIST_HOT: "2"
+          BREVO_LIST_WARM: "3"
+          BREVO_LIST_COLD: "4"
+          BREVO_SENDER_EMAIL: "ziadmohamedshafiq03@gmail.com"
+          SENDER_NAME: "Ziad"
+        run: |
+          if [ -z "$BREVO_API_KEY" ]; then echo "::warning::BREVO_API_KEY secret is not set; skipping."; exit 0; fi
+          python integrations/brevo_sequence.py ${{ inputs.dry_run && '--dry-run' || '' }}
