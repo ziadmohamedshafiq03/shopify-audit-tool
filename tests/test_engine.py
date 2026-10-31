@@ -228,3 +228,61 @@ def test_brevo_payload(monkeypatch):
     assert contact["attributes"]["FIRSTNAME"] == "Sam" and contact["attributes"]["OOS_ACTIVE"] == 13.0
     assert contact["attributes"]["SUPPLIER_COUNT"] == 3.0
     assert calls[1][1].endswith("/smtp/email") and calls[1][2]["to"] == [{"email": "me@x.com"}]
+
+
+# --- Brevo follow-up sequence ------------------------------------------------
+
+def _seq():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "brevo_sequence", os.path.join(os.path.dirname(__file__), "..", "integrations", "brevo_sequence.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def test_sequence_render_fills_placeholders():
+    seq = _seq()
+    subject, html = seq.render(0, {"FIRSTNAME": "Sam", "STORE_URL": "brand.com", "OOS_ACTIVE": 13.0}, "mailto:x")
+    assert subject == "Your oversell audit for brand.com"
+    assert "Hi Sam," in html and ">13<" in html and "{{" not in html and 'href="mailto:x"' in html
+    _, html = seq.render(1, {"STORE_URL": "brand.com"}, "mailto:x")
+    assert "Hi there," in html
+
+
+def test_sequence_run_sends_latest_due_step_once():
+    seq = _seq()
+    now = datetime(2026, 10, 10, 12, tzinfo=timezone.utc)
+
+    class Fake:
+        def __init__(self):
+            self.sent, self.marked = [], {}
+            self.lists = {
+                "3": [
+                    {"email": "a@x.com", "createdAt": "2026-10-07T10:00:00Z", "attributes": {"FOLLOWUPS_SENT": "0,1"}},
+                    {"email": "b@x.com", "createdAt": "2026-10-01T10:00:00Z", "attributes": {}},
+                    {"email": "c@x.com", "createdAt": "2026-10-01T10:00:00Z", "emailBlacklisted": True, "attributes": {}},
+                    {"email": "d@x.com", "createdAt": "2026-10-01T10:00:00Z", "attributes": {"TIER": "booked"}},
+                ],
+                "2": [{"email": "b@x.com", "createdAt": "2026-10-10T11:00:00Z", "attributes": {}}],
+            }
+
+        def ensure_attribute(self, name): pass
+        def list_contacts(self, lid): return iter(self.lists.get(lid, []))
+        def send(self, payload): self.sent.append((payload["to"][0]["email"], payload["subject"]))
+        def mark_sent(self, email, sent): self.marked[email] = sent
+
+    import pytest as _pt
+    mp = _pt.MonkeyPatch()
+    for k, v in {"BREVO_LIST_HOT": "2", "BREVO_LIST_WARM": "3", "BREVO_LIST_COLD": "",
+                 "BREVO_SENDER_EMAIL": "me@x.com"}.items():
+        mp.setenv(k, v)
+    try:
+        fake = Fake()
+        done = seq.run(now=now, client=fake)
+    finally:
+        mp.undo()
+    # b is hot (hot list wins) -> day 0 only; a is warm, 3.1 days in -> day 3; c/d skipped
+    assert sorted(done) == [("a@x.com", 3), ("b@x.com", 0)]
+    assert fake.marked["a@x.com"] == {0, 1, 3}
+    assert fake.marked["b@x.com"] == {0}
